@@ -26,8 +26,9 @@ open Syntax
 
 %token <Support.Error.info> THEN
 %token <Support.Error.info> SWITCH
+%token <Support.Error.info> CASE0
 %token <Support.Error.info> CASE1
-%token <Support.Error.info> CASE2
+%token <Support.Error.info> DEFAULT
 %token <Support.Error.info> ELSE
 %token <Support.Error.info> TRUE
 %token <Support.Error.info> FALSE
@@ -114,8 +115,8 @@ Term :
       { $1 }
   | IF Term THEN Term ELSE Term
       { TmIf($1, $2, $4, $6) }
-  | SWITCH Term CASE1 Term CASE2 Term
-    {TmSwitch($1,$2,$4,$6)}
+  | SWITCH Term CASE0 Term CASE1 Term DEFAULT Term
+    {TmSwitch($1,$2,$4,$6,$8)}
 
 AppTerm :
     ATerm

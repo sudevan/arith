@@ -9,7 +9,7 @@ type term =
     TmTrue of info
   | TmFalse of info
   | TmIf of info * term * term * term
-  | TmSwitch of info * term * term * term
+  | TmSwitch of info * term * term * term * term
   | TmZero of info
   | TmSucc of info * term
   | TmPred of info * term
@@ -30,7 +30,7 @@ let tmInfo t = match t with
   | TmSucc(fi,_) -> fi
   | TmPred(fi,_) -> fi
   | TmIsZero(fi,_) -> fi 
-  | TmSwitch(fi,_,_,_) -> fi
+  | TmSwitch(fi,_,_,_,_) -> fi
 
 (* ---------------------------------------------------------------------- *)
 (* Printing *)
@@ -65,15 +65,15 @@ let rec printtm_Term outer t = match t with
        pr "else ";
        printtm_Term false t3;
        cbox()
-  | TmSwitch(fi,t1,t2,t3) ->
+  | TmSwitch(fi,t1,t2,t3,t4) ->
     obox0();
     pr "switch ";
     printtm_Term false t1;
     print_space();
-    pr "Case 0 ";
+    pr "Case0 ";
     printtm_Term false t2;
     print_space();
-    pr "case 1 ";
+    pr "case1 ";
     printtm_Term false t3;
     cbox()
   | t -> printtm_AppTerm outer t
@@ -92,7 +92,7 @@ and printtm_ATerm outer t = match t with
        pr "0"
   | TmSucc(_,t1) ->
      let rec f  t = match t with
-         TmZero(_) -> pr "0"
+         TmZero(_) -> pr "succ 0"
        | TmSucc(_,s) -> pr "succ "; f  s
        | _ -> (pr "(succ "; printtm_ATerm false t1; pr ")")
      in f t1
