@@ -26,6 +26,10 @@ let rec eval1 t = match t with
   | TmIf(fi,t1,t2,t3) ->
       let t1' = eval1 t1 in
       TmIf(fi, t1', t2, t3)
+  | TmSwitch (fi,TmSucc(_,_),t2,t3) ->
+    t2
+  | TmSwitch (fi,TmPred(_,_),t2,t3) ->
+    t3
   | TmSucc(fi,t1) ->
       let t1' = eval1 t1 in
       TmSucc(fi, t1')

@@ -9,3 +9,5 @@ succ (succ 1);
 succ (pred 0);
 iszero (pred (succ (succ 1))); 
 iszero (0);
+switch (succ 0) case1 (0) case2 (1);
+switch (pred 0) case1 (0) case2 (1);
