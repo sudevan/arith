@@ -19,6 +19,9 @@ let reservedWords = [
   ("succ", fun i -> Parser.SUCC i);
   ("pred", fun i -> Parser.PRED i);
   ("iszero", fun i -> Parser.ISZERO i);
+  ("switch", fun i -> Parser.SWITCH i);
+  ("case1", fun i -> Parser.CASE1 i);
+  ("case2", fun i -> Parser.CASE2 i);
   
   (* Symbols *)
   ("_", fun i -> Parser.USCORE i);
