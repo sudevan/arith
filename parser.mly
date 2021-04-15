@@ -115,8 +115,8 @@ Term :
       { $1 }
   | IF Term THEN Term ELSE Term
       { TmIf($1, $2, $4, $6) }
-  | SWITCH Term CASE0 Term CASE1 Term DEFAULT Term
-    {TmSwitch($1,$2,$4,$6,$8)}
+  | SWITCH Term CASE0 Term COLON Term CASE1 Term COLON Term DEFAULT COLON Term
+    {TmSwitch($1,$2,$4,$6,$8,$10,$13)}
 
 AppTerm :
     ATerm

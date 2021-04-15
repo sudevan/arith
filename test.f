@@ -1,14 +1,6 @@
-/* Examples for testing */
-
-true;
-if false then true else false; 
-
-0; 
-iszero (succ true);
-succ (succ 0);
-succ (pred 0);
-iszero (pred (succ (succ 1))); 
-iszero (0);
-switch 0 case0 1 case1 2 default false;
-switch 0 case0 succ (succ 0) case1 1 default 1;
-switch 0 case0 true case1 1 default 2;
+switch false case0 true : 1 case1  false : 2 default : 1;
+switch 0 case0 true : 1 case1  false : 2 default : 1;
+switch true case0 iszero(succ 0) : 1 case1  true : 2 default :3;
+switch 2 case0 1 : 1 case1  2 : 3 default :4;
+switch 5 case0 1 : 1 case1  2 : 3 default :4;
+switch 5 case0 1 : 1 case1  5 : 3 default :4;
