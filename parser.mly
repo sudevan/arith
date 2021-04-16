@@ -26,6 +26,7 @@ open Syntax
 
 %token <Support.Error.info> THEN
 %token <Support.Error.info> SWITCH
+%token <Support.Error.info> CASE
 %token <Support.Error.info> CASE0
 %token <Support.Error.info> CASE1
 %token <Support.Error.info> DEFAULT
@@ -115,7 +116,7 @@ Term :
       { $1 }
   | IF Term THEN Term ELSE Term
       { TmIf($1, $2, $4, $6) }
-  | SWITCH Term CASE0 Term COLON Term CASE1 Term COLON Term DEFAULT COLON Term
+  | SWITCH Term CASE Term COLON Term CASE Term COLON Term DEFAULT COLON Term
     {TmSwitch($1,$2,$4,$6,$8,$10,$13)}
 
 AppTerm :

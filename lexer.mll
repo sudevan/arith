@@ -22,6 +22,7 @@ let reservedWords = [
   ("switch", fun i -> Parser.SWITCH i);
   ("case0", fun i -> Parser.CASE0 i);
   ("case1", fun i -> Parser.CASE1 i);
+  ("case", fun i -> Parser.CASE i);
   ("default", fun i -> Parser.DEFAULT i);
   
   (* Symbols *)
