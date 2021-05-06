@@ -1,3 +1,18 @@
+true;
+succ 0;
+iszero(succ 0);
+iszero(0);
+pred 0;
+succ (pred 0);
+pred true;
+iszero(true);
+if false then succ (succ 0) else succ 0; 
+iszero (succ true);
+succ (succ 0);
+succ (pred 0);
+iszero (pred (succ (succ 1))); 
+iszero (0);
+succ 0;
 switch false case true : 1 case  false : 2 default : 1;
 switch 0 case true : 1 case  false : 2 default : 1;
 switch true case iszero(succ 0) : 1 case  true : 2 default :3;

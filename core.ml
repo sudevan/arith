@@ -2,10 +2,32 @@ open Format
 open Syntax
 open Support.Error
 open Support.Pervasive
+exception NoRuleApplies
+(*----------------TYPE CHECKER------------------------------------*)
 
+let rec typeof t = match t with
+    TmTrue(fi) -> TBool
+    |TmFalse(fi) -> TBool
+    |TmZero(fi) -> TNat
+    |TmSucc(fi,t1) ->
+        if (=) (typeof t1) TNat then TNat
+        else error fi "Succ argument is not Nat"
+    |TmPred(fi,t1) ->
+        if (=) (typeof t1) TNat then TNat
+        else error fi "pred argument is not Nat"
+    |TmIsZero(fi,t1) ->
+        if (=) (typeof t1 ) TNat then TBool
+        else error fi "Iszero argument is not Nat"
+    |TmIf(fi,t1,t2,t3) -> 
+        if (=) (typeof t1) TBool  then
+         let tyT2 = typeof t2 in 
+           if (=) tyT2 (typeof t3 ) then tyT2
+           else error fi "arms different type"
+        else error fi "guard is not bool"
+    |_ -> TNone
 (* ------------------------   EVALUATION  ------------------------ *)
 
-exception NoRuleApplies
+
 let mycompare1 t1 t2 =   true
 let rec mycompare t1 t2 = match t1 with
     TmFalse(fi) -> (match t2 with TmFalse(fi) -> true|_ -> false)

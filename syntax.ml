@@ -15,6 +15,10 @@ type term =
   | TmPred of info * term
   | TmIsZero of info * term
  
+type typ = 
+  | TNat
+  | TBool
+  | TNone
 
 type command =
   | Eval of info * term
@@ -97,7 +101,9 @@ and printtm_ATerm outer t = match t with
        | _ -> (pr "(succ "; printtm_ATerm false t1; pr ")")
      in f t1
   | t -> pr "("; printtm_Term outer t; pr ")"
-
+ and  printty_Type outer t = match t with
+     TNat -> pr "Nat"
+     |TBool -> pr "Bool"
 let printtm t = printtm_Term true t 
 
 
