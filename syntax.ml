@@ -18,7 +18,7 @@ type term =
 type typ = 
   | TNat
   | TBool
-  | TNone
+  | TNone of string
 
 type command =
   | Eval of info * term
@@ -104,6 +104,7 @@ and printtm_ATerm outer t = match t with
  and  printty_Type outer t = match t with
      TNat -> pr "Nat"
      |TBool -> pr "Bool"
+     |TNone(er) -> pr er
 let printtm t = printtm_Term true t 
 
 

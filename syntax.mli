@@ -20,7 +20,7 @@ type command =
 type typ = 
   | TNat
   | TBool
-  | TNone
+  | TNone of string
 
 (* Printing *)
 val printtm: term -> unit

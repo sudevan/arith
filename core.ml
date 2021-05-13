@@ -11,20 +11,30 @@ let rec typeof t = match t with
     |TmZero(fi) -> TNat
     |TmSucc(fi,t1) ->
         if (=) (typeof t1) TNat then TNat
-        else error fi "Succ argument is not Nat"
+        else TNone("Succ argument is not Nat")
     |TmPred(fi,t1) ->
         if (=) (typeof t1) TNat then TNat
-        else error fi "pred argument is not Nat"
+        else TNone( "pred argument is not Nat")
     |TmIsZero(fi,t1) ->
         if (=) (typeof t1 ) TNat then TBool
-        else error fi "Iszero argument is not Nat"
+        else TNone("Iszero argument is not Nat")
     |TmIf(fi,t1,t2,t3) -> 
         if (=) (typeof t1) TBool  then
          let tyT2 = typeof t2 in 
            if (=) tyT2 (typeof t3 ) then tyT2
-           else error fi "arms different type"
-        else error fi "guard is not bool"
-    |_ -> TNone
+           else TNone("arms different type")
+        else TNone("guard is not bool")
+    |TmSwitch(fi,t1,t2,t3,t4,t5,t6) ->
+        let swType = typeof t1 in 
+        if (=) (typeof t2) swType then
+            if (=) (typeof t4) swType then
+                let case1Type = typeof t3 in
+                if (=) case1Type (typeof t5) then
+                    if (=) case1Type (typeof t6) then case1Type
+                    else TNone("Case bodies doesnot have same type")
+                else TNone("Case bodies doesnot have same type")
+            else TNone("Case term doesnot match with guard")
+        else TNone("Case term doesnot match with guard")
 (* ------------------------   EVALUATION  ------------------------ *)
 
 
