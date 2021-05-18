@@ -53,7 +53,9 @@ let alreadyImported = ref ([] : string list)
 let rec process_command  cmd = match cmd with
   | Eval(fi,t) -> 
       let t' = typeof t in
-      printty_Type true t'; 
+      printty_Type true t' ; 
+      let t1 = eval t in
+      printtm_ATerm true t1;
       force_newline();
       ()
   

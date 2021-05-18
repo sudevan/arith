@@ -102,9 +102,9 @@ and printtm_ATerm outer t = match t with
      in f t1
   | t -> pr "("; printtm_Term outer t; pr ")"
  and  printty_Type outer t = match t with
-     TNat -> pr "Nat"
-     |TBool -> pr "Bool"
-     |TNone(er) -> pr er
+     TNat -> pr "Nat : "
+     |TBool -> pr "Bool : "
+     |TNone(er) -> pr er ; pr " : "
 let printtm t = printtm_Term true t 
 
 
